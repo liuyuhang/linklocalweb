@@ -3,12 +3,13 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 
 import {LoginComponent} from './login.component';
-
+import {RegisterComponent} from './register.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +17,8 @@ import {LoginComponent} from './login.component';
 
   ],
   exports: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
 })
 

@@ -7,12 +7,13 @@ import {Dashboard4Component} from "./views/dashboards/dashboard4.component";
 import {Dashboard41Component} from "./views/dashboards/dashboard41.component";
 import {Dashboard5Component} from "./views/dashboards/dashboard5.component";
 
-import {DashboardComponent} from './views/appviews/dashboard.component';
-import {LoginComponent} from "./views/auth/login.component";
-
 import {BlankLayoutComponent} from "./components/common/layouts/blankLayout.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
 import {TopNavigationLayoutComponent} from "./components/common/layouts/topNavigationlayout.component";
+
+import {DashboardComponent} from './views/appviews/dashboard.component';
+import {LoginComponent} from "./views/auth/login.component";
+import {RegisterComponent} from './views/auth/register.component';
 
 export const ROUTES: Routes = [
   // Main redirect
@@ -45,6 +46,7 @@ export const ROUTES: Routes = [
     path: '', component: BlankLayoutComponent,
     children: [
       {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
     ]
   },
 

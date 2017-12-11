@@ -6,23 +6,31 @@
 
     </div>
     <h3>Register to LinkLocal</h3>
-    <form class="m-t" role="form" action="#">
+    <div class="alert alert-info" align="left" [hidden]="nameOK && passwordOK && emailOK && registerOK">
+      <p class="text-danger">{{registerError}}</p>
+    </div>
+    <form class="m-t" role="form" >
       <div class="form-group">
-        <input type="text" #username class="form-control" placeholder="Name" required="">
+        <input type="text" #username class="form-control" placeholder="Name" required=""
+               (blur)="checkUsername(username.value);username.value=username.value">
       </div>
       <div class="form-group">
-        <input type="email" #email class="form-control" placeholder="Email" required="">
+        <input type="email" #email class="form-control" placeholder="Email" required=""
+               (blur)="checkEmail(email.value);email.value=email.value">
       </div>
       <div class="form-group">
-        <input type="password" #password class="form-control" placeholder="Password" required="">
+        <input type="password" #password class="form-control" placeholder="Password"
+               required="" >
       </div>
       <div class="form-group">
-        <input type="password" #repassword class="form-control" placeholder="Retype Password" required="">
+        <input type="password" #repassword class="form-control" placeholder="Retype Password" required="" minlength="6"
+               (blur)="checkPassword(password.value, repassword.value);password.value=password.value">
       </div>
-      <div class="form-group">
+      <!--<div class="form-group">
         <div class="checkbox i-checks"><label> <input type="checkbox"><i></i> Agree the terms and policy </label></div>
-      </div>
-      <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
+      </div>-->
+      <button type="submit" class="btn btn-primary block full-width m-b"
+              (click)="register(username.value, email.value, password.value);password.value=password.value">Register</button>
 
       <p class="text-muted text-center"><small>Already have an account?</small></p>
       <a class="btn btn-sm btn-white btn-block" href="#/login">Login</a>

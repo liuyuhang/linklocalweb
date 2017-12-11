@@ -6,33 +6,38 @@ import {RequestOptions, RequestMethod, Http} from '@angular/http';
 import {CookieService} from 'ngx-cookie';
 import {TranslateService} from 'ng2-translate';
 import {LinkLocalConfig} from '../../app.config';
+import {AuthService} from './auth.service';
 
 
 @Component({
   templateUrl: 'login.template.html',
-  providers: [RequestService]
+  providers: [RequestService, AuthService]
 })
 export class LoginComponent {
   constructor(private http: Http, private req: RequestService, private router: Router,
-              private cookieservice: CookieService, private translate: TranslateService) {
+              private cookieservice: CookieService, private translate: TranslateService,
+              private authservice: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  private base_url = LinkLocalConfig.api_url;
-  public loginError;
+
+  public loginError = "Incorrect username/email or password.";
+  public errorHidden= true;
+
 
   login(username: string, password: string) {
-    let options = new RequestOptions({
-      method: RequestMethod.Post,
-      url: this.base_url + "/login",
-      body: {"username": username, "password": password}
-    });
+
     this.cookieservice.put('token', "");
-    this.http.request(options.url, options)
+    this.authservice.login(username, password)
       .subscribe(
         res => {
+          if (res.json().status === 401) {
+            this.loginError = "Authorization Faild";
+            this.errorHidden = false;
+            return;
+          }
           console.log(res.json());
           //返回成功，设置变量token，user，language
           LinkLocalConfig.token = res.json().token['access_token'];
@@ -42,13 +47,13 @@ export class LoginComponent {
           //设置浏览器cookie，以便页面刷新等情况的历史承接
           this.cookieservice.put('token', res.json().token['access_token']);
           this.cookieservice.put('user', res.json().token['User']);
-          this.cookieservice.put('language', res.json().language);
-
+          this.errorHidden = true;
           //跳转根目录
           this.router.navigate(['/']);
         },
         err => {
           this.loginError = JSON.parse(err._body).error;
+          this.errorHidden = false;
           console.error(err);
         }
       );

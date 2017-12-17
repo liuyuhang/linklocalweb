@@ -41,12 +41,12 @@ export class RegisterComponent {
       .subscribe(
         res => {
           console.log(res.json());
-          //返回成功，设置变量token，user，language
+          // 返回成功，设置变量token，user，language
           LinkLocalConfig.token = res.json().token['access_token'];
           LinkLocalConfig.user = res.json().token['User'];
-          //设置公用请求request的header token
+          // 设置公用请求request的header token
           this.req.token = res.json().token['access_token'];
-          //设置浏览器cookie，以便页面刷新等情况的历史承接
+          // 设置浏览器cookie，以便页面刷新等情况的历史承接
           this.cookieservice.put('token', res.json().token['access_token']);
           this.cookieservice.put('user', res.json().token['User']);
           this.nameOK = true;
@@ -54,7 +54,7 @@ export class RegisterComponent {
           this.passwordOK = true;
           this.registerOK = true;
           this.registerError = "";
-          //跳转根目录
+          // 跳转根目录
           this.router.navigate(['#/dashboard']);
         },
         err => {
@@ -80,7 +80,7 @@ export class RegisterComponent {
     this.http.request(options.url, options)
       .subscribe(
         res => {
-          //console.log(res.json());
+          // console.log(res.json());
           this.nameOK = true;
         },
         err => {
@@ -105,7 +105,7 @@ export class RegisterComponent {
     this.http.request(options.url, options)
       .subscribe(
         res => {
-          //console.log(res.json());
+          // console.log(res.json());
           this.emailOK = true;
         },
         err => {

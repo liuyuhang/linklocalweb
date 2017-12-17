@@ -9,7 +9,7 @@ import {Dashboard5Component} from "./views/dashboards/dashboard5.component";
 
 import {BlankLayoutComponent} from "./components/common/layouts/blankLayout.component";
 import {BasicLayoutComponent} from "./components/common/layouts/basicLayout.component";
-import {TopNavigationLayoutComponent} from "./components/common/layouts/topNavigationlayout.component";
+import {TopNavigationLayoutComponent} from "./components/common/layouts/topNavigationLayout.component";
 
 import {DashboardComponent} from './views/appviews/dashboard.component';
 import {LoginComponent} from "./views/auth/login.component";
